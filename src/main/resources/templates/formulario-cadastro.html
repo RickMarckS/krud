@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Formulário de Cadastro</title>
@@ -17,26 +17,30 @@
         <h2>Lista de Cadastro</h2>
 
 
-        <form>
+        <form th:object="${usuario}" method="post" action="/cadastrar">
 
             <div class="mb-3">
-                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" aria-label="Nome">
+                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" aria-label="Nome" th:field="*{nome}">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
             </div>
 
             <div class="mb-3">
-                <input class="form-control" type="text" id="email" name="email" placeholder="Email" aria-label="Email">
+                <input class="form-control" type="text" id="email" name="email" placeholder="Email" aria-label="Email" th:field="*{email}">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
 
             <div class="mb-3">
-                <input class="form-control" type="text" id="cpf" name="cpf" placeholder="Cpf" aria-label="Cpf">
+                <input class="form-control" type="text" id="cpf" name="cpf" placeholder="Cpf" aria-label="Cpf" th:field="*{cpf}">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
             </div>
 
             <div class="mb-3">
-                <input class="form-control" type="text" id="senha" name="senha" placeholder="Senha" aria-label="Senha">
+                <input class="form-control" type="text" id="senha" name="senha" placeholder="Senha" aria-label="Senha" th:field="*{senha}">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
             </div>
 
             <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" th:field="*{papel}">
                     <option selected value="" >Selecione o papel</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Usuário">Usuário</option>
