@@ -2,6 +2,8 @@ package marck.com.krud.controller
 
 import jakarta.validation.Valid
 import marck.com.krud.model.Usuario
+import marck.com.krud.repository.UsuarioRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping
 @Controller
 class UsuarioController {
 
+    @Autowired
+    lateinit var repository: UsuarioRepository //interface
 
     @GetMapping("/formulario/cadastro")
     fun abrirFormularioCadastro(model: Model): String{
@@ -31,6 +35,7 @@ class UsuarioController {
         }
 
         //salvar no bd
+        repository.save(usuario)
         println(usuario)
 
         return "home"
