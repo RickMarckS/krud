@@ -38,6 +38,16 @@ class UsuarioController {
         repository.save(usuario)
         println(usuario)
 
+        return "redirect:/home" //chama a função abrir home
+    }
+
+    @GetMapping("/home")
+    fun abrirHome(model: Model): String{//passando os dados para o html
+        //busca todos os usuários no BD
+        val usuario = repository.findAll()
+
+        model.addAttribute("usuario", usuario)//adicionando no model
+
         return "home"
     }
 
