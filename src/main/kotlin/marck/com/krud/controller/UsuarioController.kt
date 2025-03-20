@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
@@ -51,6 +52,24 @@ class UsuarioController {
         return "home"
     }
 
+    @GetMapping("/formulario/edicao/{id}")
+    fun abrirFormularioEdicao(@PathVariable("id") id: Long, model: Model): String{
 
+        val usuario = repository.findById(id).orElse(null)
+
+        model.addAttribute("usuario", usuario)
+
+        return "formulario-edicao"
+    }
+
+    @PostMapping("/editar/{id}")
+    fun editarUsuario(usuario: Usuario, @PathVariable("id") id: Long): String{
+
+        usuario.id = id
+
+        repository.save(usuario)
+
+        return "redirect:/home"
+    }
 
 }
